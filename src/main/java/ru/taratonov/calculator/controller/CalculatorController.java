@@ -5,7 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.taratonov.calculator.dto.ResponseDTO;
+import ru.taratonov.calculator.dto.ResponseDto;
 import ru.taratonov.calculator.service.CalculatorService;
 
 import java.time.LocalDate;
@@ -21,13 +21,13 @@ public class CalculatorController {
     }
 
     @GetMapping(value = "/calculacte", params = {"numOfVacationDays", "averageYearSalary"})
-    public ResponseDTO getVacationMoney(@RequestParam(value = "numOfVacationDays") int numOfVacationDays,
+    public ResponseDto getVacationMoney(@RequestParam(value = "numOfVacationDays") int numOfVacationDays,
                                         @RequestParam(value = "averageYearSalary") double averageYearSalary) {
         return calculatorService.getVacationMoney(numOfVacationDays, averageYearSalary);
     }
 
     @GetMapping(value = "/calculacte", params = {"averageYearSalary", "startDayVacation", "endDayVacation"})
-    public ResponseDTO getVacationMoney(@RequestParam(value = "averageYearSalary") double averageYearSalary,
+    public ResponseDto getVacationMoney(@RequestParam(value = "averageYearSalary") double averageYearSalary,
                                         @RequestParam(value = "startDayVacation")
                                         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDayVacation,
                                         @RequestParam(value = "endDayVacation")

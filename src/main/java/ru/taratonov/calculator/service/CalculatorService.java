@@ -3,7 +3,7 @@ package ru.taratonov.calculator.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.taratonov.calculator.dto.ResponseDTO;
+import ru.taratonov.calculator.dto.ResponseDto;
 import ru.taratonov.calculator.exception.InvalidDateRangeException;
 import ru.taratonov.calculator.exception.NumberOfVacationDaysException;
 import ru.taratonov.calculator.exception.ValueLessThanZeroException;
@@ -24,7 +24,7 @@ public class CalculatorService {
         this.holidayManager = holidayManager;
     }
 
-    public ResponseDTO getVacationMoney(int numOfVacationDays, double averageYearSalary) {
+    public ResponseDto getVacationMoney(int numOfVacationDays, double averageYearSalary) {
         if (numOfVacationDays <= 0 || averageYearSalary <= 0)
             throw new ValueLessThanZeroException();
         else if (numOfVacationDays > 28) {
@@ -32,7 +32,7 @@ public class CalculatorService {
         } else {
             double averageMonthSalary = averageYearSalary / 12;
             double scale = Math.pow(10, 2);
-            ResponseDTO response = new ResponseDTO();
+            ResponseDto response = new ResponseDto();
             double vacationMoney;
             if (Double.compare(averageMonthSalary, MINIMUM_WAGE) <= 0) {
                 vacationMoney = MINIMUM_WAGE / 29.3 * numOfVacationDays;
@@ -50,7 +50,7 @@ public class CalculatorService {
         }
     }
 
-    public ResponseDTO getVacationMoney(double averageYearSalary, LocalDate startDayVacation, LocalDate endDayVacation) {
+    public ResponseDto getVacationMoney(double averageYearSalary, LocalDate startDayVacation, LocalDate endDayVacation) {
         if (endDayVacation.getYear() != 2023 || startDayVacation.getYear() != 2023) {
             throw new WrongYearException();
         } else if (endDayVacation.isBefore(startDayVacation)) {
