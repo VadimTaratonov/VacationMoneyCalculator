@@ -32,6 +32,6 @@ public class CalculatorController {
                                         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDayVacation,
                                         @RequestParam(value = "endDayVacation")
                                         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDayVacation) {
-        return calculatorService.getVacationMoney(averageYearSalary, startDayVacation, endDayVacation);
+        return calculatorService.getVacationMoneyPeriodOfTime(averageYearSalary, startDayVacation, endDayVacation);
     }
 }

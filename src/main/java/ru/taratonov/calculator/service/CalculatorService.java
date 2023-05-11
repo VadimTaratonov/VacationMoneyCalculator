@@ -50,7 +50,7 @@ public class CalculatorService {
         }
     }
 
-    public ResponseDto getVacationMoney(double averageYearSalary, LocalDate startDayVacation, LocalDate endDayVacation) {
+    public ResponseDto getVacationMoneyPeriodOfTime(double averageYearSalary, LocalDate startDayVacation, LocalDate endDayVacation) {
         if (endDayVacation.getYear() != 2023 || startDayVacation.getYear() != 2023) {
             throw new WrongYearException();
         } else if (endDayVacation.isBefore(startDayVacation)) {
