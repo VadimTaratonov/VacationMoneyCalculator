@@ -32,21 +32,21 @@ public class CalculatorService {
         } else {
             double averageMonthSalary = averageYearSalary / 12;
             double scale = Math.pow(10, 2);
-            ResponseDto response = new ResponseDto();
-            double vacationMoney;
+            String description;
             if (Double.compare(averageMonthSalary, MINIMUM_WAGE) <= 0) {
-                vacationMoney = MINIMUM_WAGE / 29.3 * numOfVacationDays;
-                response.setDescription("Your average month salary less than minimum wage. " +
-                        "The minimum wage will be used to calculate vacation money!");
+                averageMonthSalary = MINIMUM_WAGE;
+                description = "Your average month salary less than minimum wage. " +
+                        "The minimum wage will be used to calculate vacation money!";
             } else {
-                vacationMoney = averageMonthSalary / 29.3 * numOfVacationDays;
-                response.setDescription("Vacation money was successfully calculated!");
+                description = "Vacation money was successfully calculated!";
             }
+            double vacationMoney = averageMonthSalary / 29.3 * numOfVacationDays;
             double personalIncomeTax = Math.round(vacationMoney * 0.13);
-            response.setAmountVacationMoney(Math.round(vacationMoney * scale) / scale);
-            response.setPersonalIncomeTax(Math.round(personalIncomeTax * scale) / scale);
-            response.setTotalAmountVacationMoney(Math.round((vacationMoney - personalIncomeTax) * scale) / scale);
-            return response;
+            return new ResponseDto(
+                    description,
+                    Math.round(vacationMoney * scale) / scale,
+                    personalIncomeTax,
+                    Math.round((vacationMoney - personalIncomeTax) * scale) / scale);
         }
     }
 
